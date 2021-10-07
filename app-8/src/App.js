@@ -13,12 +13,14 @@ function App() {
 
   const apiSearch = (e) => {
     e.preventDefault()
-
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${input.toLowerCase()}`).then(res => {
-      const { data } = res
-      setState({ name: data.species.name, id: data.id, type: data.types.length > 1 ? [data.types[0].type.name, data.types[1].type.name] : data.types[0].type.name, sprite: data.sprites.front_default })
-    })
-
+    
+    if (input.length > 0) {
+       axios.get(`https://pokeapi.co/api/v2/pokemon/${input.toLowerCase()}`).then(res => {
+        const { data } = res
+        setState({ name: data.species.name, id: data.id, type: data.types.length > 1 ? [data.types[0].type.name, data.types[1].type.name] : data.types[0].type.name, sprite: data.sprites.front_default })
+      })
+    }
+    
     setInput("")
   }
 
