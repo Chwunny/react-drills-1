@@ -1,7 +1,9 @@
 import React from 'react'
+import './Pokemon.css'
 
 const Pokemon = (props) => {
-    const { name, id, type, sprite } = props.state
+    const { name, id, type, sprite, shiny } = props.state
+    const { isShiny } = props
     
     return (
         <div>
@@ -13,7 +15,7 @@ const Pokemon = (props) => {
             }) 
             : <h2>{type.charAt(0).toUpperCase() + type.slice(1)}</h2>}
             
-            <img src={sprite} alt="" />
+            <img id="pokeImg" src={isShiny ? shiny : sprite} alt="" />
         </div>
     )
 }
