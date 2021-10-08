@@ -12,11 +12,11 @@ function App() {
     setInput(val)
   }
 
-  const apiSearch = (e) => {
+  const apiSearch = async (e) => {
     e.preventDefault()
     
     if (input.length > 0) {
-       axios.get(`https://pokeapi.co/api/v2/pokemon/${input.toLowerCase()}`).then(res => {
+       await axios.get(`https://pokeapi.co/api/v2/pokemon/${input.toLowerCase()}`).then(res => { 
         const { data } = res
         setState({ name: data.species.name, id: data.id, type: data.types.length > 1 ? [data.types[0].type.name, data.types[1].type.name] : data.types[0].type.name, sprite: data.sprites.front_default, shiny: data.sprites.front_shiny })
       })
@@ -26,12 +26,13 @@ function App() {
     setIsShiny(false)
   }
 
-  const getRandomApiSearch = () => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random()*898)}`).then(res => {
+  const getRandomApiSearch = async () => {
+    await axios.get(`https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random()*898)}`).then(res => {
       console.log(res.data);
       const { data } = res
         setState({ name: data.species.name, id: data.id, type: data.types.length > 1 ? [data.types[0].type.name, data.types[1].type.name] : data.types[0].type.name, sprite: data.sprites.front_default, shiny: data.sprites.front_shiny })
     })
+
     setIsShiny(false)
   }
 
